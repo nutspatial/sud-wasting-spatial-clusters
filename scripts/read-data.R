@@ -5,7 +5,7 @@
 ## ---- Decrypt and read nutrition data ----------------------------------------
 
 input_data <- decrypt(
-  expr = read.csv("data-raw/north-darfur-smart-survey.csv"),
+  expr = read.csv("data/raw/north-darfur-smart-survey.csv"),
   key = secret_key
 )
 
