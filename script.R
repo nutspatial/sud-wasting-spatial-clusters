@@ -32,4 +32,4 @@ source(file = "scripts/data-quality.R")
 
 ## ---- Run SaTScan ------------------------------------------------------------
 
-source(file = "script.R")
+source(file = "scripts/satscan.R")

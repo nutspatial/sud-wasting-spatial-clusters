@@ -1,18 +1,46 @@
 #'
 #'
-#' Run SaTScan
+#' Run SaTScan through its GUI
 #'
 #'
 
-run_satscan <- function(.data, base_filename, basepath, output_dir, .scan_for = c("high, high-low")) {
+run_satscan <- function(
+    .data,
+    filename,
+    destfile,
+    destfile_params = destfile,
+    .scan_for = c("high-rates", "high-low-rates")) {
+  
+  ## Enforce options in `.scan_for` ----
   .scan_for <- match.arg(.scan_for)
-  prepare_case_ctr_geo_files(.data = .data, base_filename = base_filename, output_dir = output_dir)
 
-  configure_satscan(basepath = basepath, .scan_for = .scan_for)
+  ## Get SaTScan input data ready for the job ----
+  do.call(
+    what = prepare_case_ctr_geo_files,
+    args = list(
+      .data = .data,
+      filename = filename,
+      destfile = destfile
+    )
+  )
 
-  results <- satscan(
-    prmlocation = dirname(basepath),
-    prmfilename = basename(basepath)
+  ## Set SaTScan parameters for purely spatial analysis ----
+  do.call(
+    what = configure_satscan,
+    args = list(
+      .scan_for = .scan_for, 
+      destfile_params = destfile_params, 
+      filename = filename
+    )
+  )
+
+  ## Run de facto SaTScan ----
+  results <- do.call(
+    what = satscan,
+    args = list(
+      prmlocation = do.call(what = dirname, args = list(destfile_params)),
+      prmfilename = do.call(what = basename, args = list(filename))
+    )
   )
 
   results
