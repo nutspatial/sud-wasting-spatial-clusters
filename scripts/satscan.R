@@ -7,8 +7,8 @@
 
 
 ## ---- Create a temporary directory -------------------------------------------
-prm_dir <- "data/satscan-input"
-prm_file <- "elfasher"
+destfile <- "data/satscan"
+filename <- "elfasher"
 
 
 ## ---- Set SatScan analysis parameters ----------------------------------------
@@ -30,10 +30,9 @@ do.call(
   what = run_satscan,
   args = list(
     .data = smart_wfhz,
-    base_filename = "elfasher",
-    output_dir = "data/satscan",
-    .scan_for = "high", 
-    basepath = "data/satscan"
+    filename = filename,
+    destfile = destfile,
+    destfile_params = destfile,
+    .scan_for = "high-rates"
   )
 )
-

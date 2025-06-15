@@ -50,13 +50,17 @@ wrangle_data <- function(.data) {
 #' 
 #' 
 
-prepare_case_ctr_geo_files <- function(.data, base_filename, output_dir) {
+prepare_case_ctr_geo_files <- function(.data, filename, destfile) {
   ## Create directory if it does not exist ----
-  if (!dir.exists(output_dir)) {
+  if (!dir.exists(destfile)) {
     dir.create(
-      path = output_dir,
+      path = destfile,
       showWarnings = TRUE,
       recursive = TRUE
+    )
+  } else {
+    message(
+      paste0("`", destfile, "` already exists in project repo.")
     )
   }
 
@@ -70,8 +74,8 @@ prepare_case_ctr_geo_files <- function(.data, base_filename, output_dir) {
     what = write.cas,
     args = list(
       x = files[[1]],
-      location = output_dir,
-      filename = base_filename
+      location = destfile,
+      filename = filename
     )
   )
 
@@ -80,8 +84,8 @@ prepare_case_ctr_geo_files <- function(.data, base_filename, output_dir) {
     what = write.ctl,
     args = list(
       x = files[[2]],
-      location = output_dir,
-      filename = base_filename
+      location = destfile,
+      filename = filename
     )
   )
 
@@ -90,11 +94,11 @@ prepare_case_ctr_geo_files <- function(.data, base_filename, output_dir) {
     what = write.geo,
     args = list(
       x = files[[3]],
-      location = output_dir,
-      filename = base_filename
+      location = destfile,
+      filename = filename
     )
   )
 
   # Return full path for later
-  file.path(output_dir, base_filename)
+  file.path(destfile, filename)
 }
