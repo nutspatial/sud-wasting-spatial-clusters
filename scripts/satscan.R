@@ -26,6 +26,7 @@ do.call(
 )
 
 ## ---- Run SaTScan ------------------------------------------------------------
+
 do.call(
   what = run_satscan,
   args = list(
@@ -33,6 +34,8 @@ do.call(
     filename = filename,
     destfile = destfile,
     destfile_params = destfile,
-    .scan_for = "high-rates"
+    .scan_for = "high-rates", 
+    verbose = TRUE, 
+    sslocation = "/Applications/SaTScan.app/Contents/app/satscan"
   )
 )
