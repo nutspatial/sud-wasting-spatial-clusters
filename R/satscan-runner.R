@@ -6,9 +6,11 @@
 
 run_satscan <- function(
     .data,
-    filename,
-    destfile,
+    filename = character(),
+    destfile = character(),
     destfile_params = destfile,
+    sslocation = character(),
+    verbose = FALSE,
     .scan_for = c("high-rates", "high-low-rates")) {
   
   ## Enforce options in `.scan_for` ----
@@ -39,7 +41,9 @@ run_satscan <- function(
     what = satscan,
     args = list(
       prmlocation = do.call(what = dirname, args = list(destfile_params)),
-      prmfilename = do.call(what = basename, args = list(filename))
+      prmfilename = do.call(what = basename, args = list(filename)),
+      sslocation = sslocation, 
+      verbose = verbose
     )
   )
 
