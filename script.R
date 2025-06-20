@@ -9,6 +9,7 @@ library(dplyr)
 library(mwana)
 library(lubridate)
 library(rsatscan)
+library(sf)
 
 ## ---- Retrieve project secret key --------------------------------------------
 
@@ -33,3 +34,5 @@ source(file = "scripts/data-quality.R")
 ## ---- Run SaTScan ------------------------------------------------------------
 
 source(file = "scripts/satscan.R")
+
+# =============================== End of Worflow ===============================
