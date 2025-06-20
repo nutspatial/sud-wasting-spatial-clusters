@@ -33,6 +33,7 @@ wrangle_data <- function(.data) {
       locationid = cluster,
       latitude, longitude
     ) |>
+    relocate(longitude, .after = locationid) |> 
     slice_head(
       by = locationid,
       n = 1
