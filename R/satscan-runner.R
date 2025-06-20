@@ -11,7 +11,12 @@ run_satscan <- function(
     destfile_params = destfile,
     sslocation = character(),
     verbose = FALSE,
-    .scan_for = c("high-rates", "high-low-rates")) {
+    .scan_for = c("high-rates", "high-low-rates"),
+    satscan_version,
+    cleanup = TRUE,
+    startdate,
+    enddate
+  ) {
   
   ## Enforce options in `.scan_for` ----
   .scan_for <- match.arg(.scan_for)
@@ -32,7 +37,10 @@ run_satscan <- function(
     args = list(
       .scan_for = .scan_for, 
       destfile_params = destfile_params, 
-      filename = filename
+      filename = filename, 
+      satscan_version = satscan_version,
+      startdate = startdate,
+      enddate = enddate
     )
   )
 
@@ -40,10 +48,12 @@ run_satscan <- function(
   results <- do.call(
     what = satscan,
     args = list(
-      prmlocation = do.call(what = dirname, args = list(destfile_params)),
+      prmlocation = destfile_params,
       prmfilename = do.call(what = basename, args = list(filename)),
-      sslocation = sslocation, 
-      verbose = verbose
+      sslocation = sslocation,
+      ssbatchfilename = "satscan",
+      verbose = verbose, 
+      cleanup = cleanup
     )
   )
 
