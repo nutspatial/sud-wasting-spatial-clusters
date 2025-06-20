@@ -7,6 +7,9 @@
 
 configure_satscan <- function(filename, 
   destfile_params,
+  satscan_version,
+  startdate,
+  enddate,
   .scan_for = c("high-rates", "high-low-rates")) {
 
   ## Enfornce options in `.scan_for` ----
@@ -19,7 +22,10 @@ configure_satscan <- function(filename,
     "high-rates" = {
       do.call(
         what = ss.options,
-        list(reset = TRUE)
+        list(
+          reset = TRUE,
+          version = satscan_version
+        )
       )
 
       #### Set parameters as in SaTScan input tab ----
@@ -42,11 +48,13 @@ configure_satscan <- function(filename,
         args = list(
           invals = list(
           AnalysisType = 1, # Purely Spatial
-          ModelType = 2, # Bernoulli
+          ModelType = 1, # Bernoulli
           ScanAreas = 1,
           MaxSpatialSizeInPopulationAtRisk = 50,
-          SpatialWindowShapeType = 0,
-          PrecisionCaseTimes = 0
+          SpatialWindowShapeType = 0, 
+          PrecisionCaseTimes = 0,
+          StartDate = startdate,
+          EndDate = enddate
           ), 
           reset = FALSE
         )
@@ -82,7 +90,10 @@ configure_satscan <- function(filename,
     "high-low-rates" = {
       do.call(
         what = ss.options,
-        list(reset = TRUE)
+        list(
+          reset = TRUE, 
+          version = satscan_version
+        )
       )
 
       #### Set parameters as in SaTScan input tab ----
@@ -105,11 +116,12 @@ configure_satscan <- function(filename,
         args = list(
           invals = list(
           AnalysisType = 1, # Purely Spatial
-          ModelType = 2, # Bernoulli
+          ModelType = 1, # Bernoulli
           ScanAreas = 3,
           MaxSpatialSizeInPopulationAtRisk = 50,
           SpatialWindowShapeType = 0,
-          PrecisionCaseTimes = 0
+          StartDate = startdate,
+          EndDate = enddate
           ), 
           reset = FALSE
         )
